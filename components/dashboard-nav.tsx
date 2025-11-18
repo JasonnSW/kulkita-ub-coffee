@@ -12,6 +12,7 @@ import {
   Settings,
   ShoppingCart,
   Users,
+  Ellipsis,
   TrendingUp,
 } from "lucide-react";
 
@@ -30,6 +31,11 @@ const navItems = [
     title: "FIFO",
     href: "/dashboard/fifo",
     icon: Clock,
+  },
+  {
+    title: "Menu",
+    href: "/dashboard/menu",
+    icon: Ellipsis,
   },
   {
     title: "Prediksi",

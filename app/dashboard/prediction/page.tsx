@@ -26,10 +26,10 @@ export default async function PredictionPage() {
       </div>
 
       <Tabs defaultValue="alerts">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="alerts">Peringatan Aktif</TabsTrigger>
           <TabsTrigger value="model">Insight Model</TabsTrigger>
-          <TabsTrigger value="settings">Pengaturan</TabsTrigger>
+          {/* <TabsTrigger value="settings">Pengaturan</TabsTrigger> */}
         </TabsList>
         <TabsContent value="alerts" className="space-y-4">
           <HydrationBoundary state={state}>
@@ -39,9 +39,9 @@ export default async function PredictionPage() {
         <TabsContent value="model" className="space-y-4">
           <PredictionModelInsights />
         </TabsContent>
-        <TabsContent value="settings" className="space-y-4">
+        {/* <TabsContent value="settings" className="space-y-4">
           <AlertSettings />
-        </TabsContent>
+        </TabsContent> */}
       </Tabs>
     </div>
   );

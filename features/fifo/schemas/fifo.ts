@@ -23,3 +23,19 @@ export const manualFormSchema = z.object({
     required_error: "Pilih satuan.",
   }),
 });
+
+export type FifoBatch = {
+  id: string;
+  batchCode: string;
+  ingredientName: string;
+  weight: number;
+  unit: string;
+  pricePerKg: number;
+  entryDate: string;
+  expiryDate: string;
+  storageLocation: string;
+  freshnessStatus: string;
+  daysUntilExpiry: number;
+  urgencyLevel: string;
+  notes: string;
+};

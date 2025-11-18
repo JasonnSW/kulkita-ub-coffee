@@ -26,10 +26,10 @@ export default async function ForecastPage() {
       </div>
 
       <Tabs defaultValue="summary">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="summary">Ringkasan Prediksi</TabsTrigger>
           <TabsTrigger value="recommendation">Rekomendasi Stok</TabsTrigger>
-          <TabsTrigger value="settings">Pengaturan Prediksi</TabsTrigger>
+          {/* <TabsTrigger value="settings">Pengaturan Prediksi</TabsTrigger> */}
         </TabsList>
         <HydrationBoundary state={state}>
           <TabsContent value="summary" className="space-y-4">
@@ -38,9 +38,9 @@ export default async function ForecastPage() {
           <TabsContent value="recommendation" className="space-y-4">
             <ForecastRecommendation />
           </TabsContent>
-          <TabsContent value="settings" className="space-y-4">
+          {/* <TabsContent value="settings" className="space-y-4">
             <ForecastSettings />
-          </TabsContent>
+          </TabsContent> */}
         </HydrationBoundary>
       </Tabs>
     </div>

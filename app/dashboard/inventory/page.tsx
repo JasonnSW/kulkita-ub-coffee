@@ -16,8 +16,8 @@ export default async function InventoryPage() {
           <p className="text-muted-foreground">Kelola stok bahan segar</p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline">Ekspor Data</Button>
-          <Button>Tambah Batch Baru</Button>
+          {/* <Button variant="outline">Ekspor Data</Button> */}
+          {/* <Button>Tambah Batch Baru</Button> */}
         </div>
       </div>
 

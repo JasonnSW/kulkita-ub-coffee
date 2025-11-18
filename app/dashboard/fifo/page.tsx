@@ -18,7 +18,7 @@ export default async function FifoPage() {
             Optimasi penggunaan bahan dengan prinsip First In, First Out
           </p>
         </div>
-        <Button>Gunakan Bahan</Button>
+        {/* <Button>Gunakan Bahan</Button> */}
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
