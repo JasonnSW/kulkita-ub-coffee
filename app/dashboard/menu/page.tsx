@@ -57,7 +57,7 @@ export default function MenuPage() {
   };
 
   return (
-    <main className="min-h-screen bg-background p-6 space-y-6">
+    <main className="min-h-screen bg-background space-y-6">
       <MenuHeader onAddNew={handleAddNew} />
 
       {isLoading && (
