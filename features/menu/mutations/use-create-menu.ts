@@ -10,13 +10,22 @@ export function useCreateMenu() {
   const qc = useQueryClient();
 
   return useMutation({
-    mutationFn: (payload: CreateMenuPayload) => createMenu(payload),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ["menus"] });
-      toast.success("Menu ditambah");
-    },
-    onError: () => {
-      toast.error("Menu gagal ditambah");
+    mutationFn: async (payload: CreateMenuPayload) => {
+      const t = toast.loading("Menambahkan menu...");
+      try {
+        const result = await createMenu(payload);
+        toast.success("Menu berhasil ditambahkan", {
+          id: t,
+          description: "Data menu telah tersimpan.",
+        });
+        return result;
+      } catch (err: any) {
+        toast.error("Gagal menambahkan menu", {
+          id: t,
+          description: err?.message ?? "Terjadi kesalahan.",
+        });
+        throw err;
+      }
     },
   });
 }

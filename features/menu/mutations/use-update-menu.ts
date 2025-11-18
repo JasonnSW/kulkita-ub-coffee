@@ -17,10 +17,14 @@ export function useUpdateMenu() {
     mutationFn: ({ id, payload }: UpdateArgs) => updateMenu(id, payload),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["menus"] });
-      toast.success("Menu berhasil diperbarui");
+      toast.success("Menu berhasil diperbarui", {
+        description: "Perubahan menu telah disimpan.",
+      });
     },
-    onError: () => {
-      toast.error("Menu gagal diperbarui");
+    onError: (err) => {
+      toast.error("Menu gagal diperbarui", {
+        description: err?.message ?? "Terjadi kesalahan, silakan coba lagi.",
+      });
     },
   });
 }
