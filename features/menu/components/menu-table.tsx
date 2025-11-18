@@ -50,13 +50,15 @@ export function MenuTable({ items, onEdit }: MenuTableProps) {
   return (
     <>
       <div className="w-full flex justify-end">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-        <Input
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Cari bahan / menu / kategori..."
-          className="text-sm"
-        />
+        <div className="relative w-full">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Cari bahan / menu / kategori..."
+            className="pl-9 text-sm"
+          />
+        </div>
       </div>
       <div className="bg-card border border-border rounded-lg max-h-[750px] flex flex-col">
         {/* Search di atas tabel */}
