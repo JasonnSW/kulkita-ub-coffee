@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MenuItem } from "../schema/menu";
+import { useDeleteMenu } from "../mutations/use-delete-menu";
 
 interface MenuTableProps {
   items: MenuItem[];
@@ -20,6 +21,8 @@ interface MenuTableProps {
 
 export function MenuTable({ items, onEdit }: MenuTableProps) {
   const [search, setSearch] = useState("");
+
+  const { mutate: deleteMenuMutate } = useDeleteMenu();
 
   if (items.length === 0) {
     return (
@@ -159,7 +162,7 @@ export function MenuTable({ items, onEdit }: MenuTableProps) {
                                 Edit
                               </DropdownMenuItem>
                               <DropdownMenuItem
-                                // onClick={() => onDelete(item.id)}
+                                onClick={() => deleteMenuMutate(item.id)}
                                 className="flex gap-2 text-destructive"
                               >
                                 <Trash2 className="w-4 h-4" />

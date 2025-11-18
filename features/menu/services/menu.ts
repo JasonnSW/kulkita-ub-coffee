@@ -58,3 +58,16 @@ export async function updateMenu(
 
   return res;
 }
+
+export async function deleteMenu(id: string): Promise<any> {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value || "";
+
+  const res = await apiClient(`/api/menus/${id}`, "DELETE", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return res;
+}

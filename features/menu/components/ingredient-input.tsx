@@ -13,7 +13,6 @@ import { Ingredient } from "../types/menu";
 import { useQuery } from "@tanstack/react-query";
 import { getAllByBatchesPriority } from "@/features/fifo/services/fifo";
 import { useMemo } from "react";
-import { FifoBatch } from "@/features/fifo/schemas/fifo";
 
 interface IngredientInputProps {
   ingredient: Ingredient;

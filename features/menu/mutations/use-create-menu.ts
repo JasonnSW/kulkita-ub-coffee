@@ -4,7 +4,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { type CreateMenuPayload } from "../schema/menu";
 import { createMenu } from "../services/menu";
 import { toast } from "sonner";
-import { error } from "console";
 
 export function useCreateMenu() {
   const qc = useQueryClient();
@@ -18,6 +17,7 @@ export function useCreateMenu() {
           id: t,
           description: "Data menu telah tersimpan.",
         });
+        qc.invalidateQueries({ queryKey: ["menus"] });
         return result;
       } catch (err: any) {
         toast.error("Gagal menambahkan menu", {
