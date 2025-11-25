@@ -22,7 +22,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { inventorySchema } from "../schemas/inventory";
 import { useCreateBatch } from "../mutations/use-create-batch";
-import { INGREDIENT_GROUPS } from "../data/inventory";
+import { IngredientSelect } from "./ingredient-select";
 
 export function AddBatchForm() {
   const { mutate: createBatch, isPending } = useCreateBatch();
@@ -55,33 +55,17 @@ export function AddBatchForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Nama Bahan</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Pilih bahan" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {INGREDIENT_GROUPS.map((group) => (
-                      <div key={group.label}>
-                        <div className="px-2 py-1 text-xs font-semibold text-muted-foreground">
-                          {group.label}
-                        </div>
-                        {group.items.map((item) => (
-                          <SelectItem key={item.value} value={item.value}>
-                            {item.label ?? item.value}
-                          </SelectItem>
-                        ))}
-                        <div className="my-1 border-t border-muted/20" />
-                      </div>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <FormControl>
+                  <IngredientSelect
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="Pilih bahan"
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name="category"
@@ -146,6 +130,7 @@ export function AddBatchForm() {
                     <SelectItem value="butir">Butir</SelectItem>
                     <SelectItem value="ikat">Ikat</SelectItem>
                     <SelectItem value="buah">Buah</SelectItem>
+                    <SelectItem value="sisir">Sisir</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
