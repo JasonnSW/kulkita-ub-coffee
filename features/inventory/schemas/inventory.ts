@@ -22,3 +22,11 @@ export const inventorySchema = z.object({
   }),
   notes: z.string().optional(),
 });
+
+export const updateBatchStatusSchema = z.object({
+  batchCode: z.string().min(1, "Batch code wajib diisi"),
+  status: z.enum(["ACTIVE", "EXPIRED", "DISCARDED"]),
+  notes: z.string().optional().nullable(),
+});
+
+export type UpdateBatchStatusInput = z.infer<typeof updateBatchStatusSchema>;

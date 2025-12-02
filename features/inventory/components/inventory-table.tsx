@@ -23,6 +23,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllInventoryItems } from "../services/inventory";
 import { useSerialThermal } from "@/hooks/use-serial-thermal";
 import { formatRupiah } from "@/utils/format-currency";
+import { EditBatchDialog } from "./edit-batch-inventory";
+import { useUpdateBatch } from "../mutations/use-update-batch";
 
 interface InventoryTableProps {
   category?: "all" | "SAYURAN" | "BUAH" | "PROTEIN" | "BAHAN_POKOK";
@@ -38,6 +40,11 @@ export function InventoryTable({ category = "all" }: InventoryTableProps) {
   });
 
   const { status, connect, printBatch, printBase64 } = useSerialThermal();
+
+  const { mutate: updateBatch, isPending } = useUpdateBatch();
+
+  const [editingBatch, setEditingBatch] = useState<any | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const items = Array.isArray(data) ? data : [];
 
@@ -156,7 +163,14 @@ export function InventoryTable({ category = "all" }: InventoryTableProps) {
                         <DropdownMenuContent align="end">
                           <DropdownMenuItem>Lihat Detail</DropdownMenuItem>
                           <DropdownMenuItem>Gunakan</DropdownMenuItem>
-                          <DropdownMenuItem>Edit</DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setEditingBatch(item);
+                              setIsDialogOpen(true);
+                            }}
+                          >
+                            Edit
+                          </DropdownMenuItem>
                           <DropdownMenuItem>Hapus</DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
@@ -172,6 +186,33 @@ export function InventoryTable({ category = "all" }: InventoryTableProps) {
               )}
             </TableBody>
           </Table>
+
+          <EditBatchDialog
+            open={isDialogOpen}
+            batch={editingBatch}
+            onClose={() => {
+              setIsDialogOpen(false);
+              setEditingBatch(null);
+            }}
+            onSubmit={(data) => {
+              if (!editingBatch) return;
+
+              updateBatch(
+                {
+                  batchCode: editingBatch.batchCode,
+                  status: data.status,
+                  notes: data.notes,
+                },
+                {
+                  onSuccess: () => {
+                    setIsDialogOpen(false);
+                    setEditingBatch(null);
+                  },
+                }
+              );
+            }}
+            loading={isPending}
+          />
         </div>
       </div>
     </div>

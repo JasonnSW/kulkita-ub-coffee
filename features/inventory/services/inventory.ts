@@ -1,5 +1,5 @@
 import { apiClient } from "@/lib/api-client";
-import { inventorySchema } from "../schemas/inventory";
+import { inventorySchema, updateBatchSchema } from "../schemas/inventory";
 import { z } from "zod";
 
 export async function createBatch(payload: z.infer<typeof inventorySchema>) {
@@ -13,5 +13,16 @@ export async function createBatch(payload: z.infer<typeof inventorySchema>) {
 export async function getAllInventoryItems() {
   const res = await apiClient("/api/batches", "GET");
   // console.log("Fetched inventory items:", res);
+  return res;
+}
+
+export async function updateBatchStatus(
+  params: z.infer<typeof updateBatchSchema>
+) {
+  const res = await apiClient("/api/batches/status", "PUT", {
+    body: JSON.stringify(params),
+  });
+
+  console.log("Batch updated:", res);
   return res;
 }
